@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Buuuuuug
 subtitle:
-description:
-author: John Doe
-language:
+description: 好奇，别停
+author: 强壮的喵
+language: zh-Hans
 timezone:
 
 # URL
@@ -16,6 +16,8 @@ url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+
+avatar: /images/avatar.png
 
 # Directory
 source_dir: source
@@ -63,9 +65,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/strongfanfan/hexoBlog.git
+  branch: master
