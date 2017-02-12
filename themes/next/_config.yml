@@ -41,6 +41,7 @@ menu:
   #about: /about
   archives: /archives
   tags: /tags
+  reading: /reading
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -58,6 +59,7 @@ menu_icons:
   categories: th
   schedule: calendar
   tags: tags
+  reading: book
   archives: archive
   sitemap: sitemap
   commonweal: heartbeat
