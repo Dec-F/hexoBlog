@@ -6,7 +6,7 @@
 title: No Bug,No Jump
 subtitle:
 description: 吃饭，睡觉，改bug
-author: 山石久渡
+author: 久渡
 language: zh-Hans
 timezone:
 
@@ -14,7 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.strongfanfan.top
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :year/:month/
 permalink_defaults:
 
 avatar: /images/avatar.png
