@@ -13,6 +13,7 @@ tags:
 **考虑到句子通顺，以及本人语言水平有限，有些地方没有按照原文直译。容易引起误解的地方都贴上原文了。**
 
 
+
 <!-- more -->
 
 ## 概念
@@ -132,5 +133,38 @@ JavaScript的不可变性和可变性的概念比其他一些编程语言更加�
 ### 可变性（Mutable）
 如果一个对象是可变的。则它的值能在创建以后修改。
 
-### Javascript中的可变性和不可变性
+### Javascript语言设计中的可变性和不可变性
+在JavaScript中，设计上，字符串和数字是不可变的。如果我们对它进行操作，下面的方法很容易理解。
 
+```js
+
+var str = 'Hello!';
+var anotherStr = str.substring(2);
+// result: str = 'Hello!' (unchanged)
+// result: anotherStr = 'llo!' (new string)
+```
+
+我们使用的方法并没有修改原始字符串。相反，它会创建一个新的字符串。我们可以给变量一个其他值，but once we've created our string, it will always be .
+
+数字最好也是不变性的。下面代码始终具有相同的结果：
+```js
+var three = 1 + 2;
+// result: three = 3
+```
+这表明，不变性在JavaScript的设计中确实存在。然而，JS开发人员都知道，JS中大部分是可变的。例如，对象和数组设计可变的。考虑以下：
+
+```js
+var arr = [1, 2, 3];
+arr.push(4);
+// result: arr = [1, 2, 3, 4]
+
+var obj = { greeting: 'Hello' };
+obj.name = 'Jon';
+// result: obj = { greeting: 'Hello', name: 'Jon' }
+```
+在这些例子中，原始的对象被改变。没有返回新的对象；
+
+要了解更多关于其他语言的可变性，分辨出什么是可变，什么是不可变。
+### JavaScript实践中不变性
+
+函数式编程在JavaScript中获得了大量的关注。但是在设计上，JS是一个非常易变的，多范型的语言。函数式编程强调不变性。当开发人员试图改变不可变对象时将引发错误。所以写函数式程序时我们怎么能调和JS与生俱来的可变性？
