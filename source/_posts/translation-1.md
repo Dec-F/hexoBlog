@@ -5,7 +5,7 @@ categories:
 - Translation
 tags: 
 - JavaScript
-- translation
+- 函数式编程
 ---
 
 **本文译自[原文链接](https://auth0.com/blog/glossary-of-modern-javascript-concepts/)**
@@ -133,3 +133,4 @@ JavaScript的不可变性和可变性的概念比其他一些编程语言更加�
 如果一个对象是可变的。则它的值能在创建以后修改。
 
 ### Javascript中的可变性和不可变性
+
