@@ -60,7 +60,7 @@ tags:
 
 也就是说，彼此之间存在某种关系的概念、事物、对象等等，都构成"范畴"。随便什么东西，只要能找出它们之间的关系，就能定义一个"范畴"。
 
-![](http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022210.jpg)
+![](http://omqz8y2im.bkt.clouddn.com/bg2017022210.jpg)
 
 上图中，各个点与它们之间的箭头，就构成一个范畴。
 
@@ -119,7 +119,7 @@ tags:
 
 ### 2.1 函数的合成
 如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做"函数的合成"（compose）。
-![](http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022204.png)
+![](http://omqz8y2im.bkt.clouddn.com/bg2017022204.png)
 
 上图中，`X`和`Y`之间的变形关系是函数`f`，`Y`和`Z`之间的变形关系是函数`g`，那么`X`和`Z`之间的关系，就是`g`和`f`的合成函数`g·f`。
 
@@ -134,7 +134,7 @@ tags:
  ```
 函数的合成还必须满足结合律。
 
-![](http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022209.png)
+![](http://omqz8y2im.bkt.clouddn.com/bg2017022209.png)
 
 ```js
  compose(f, compose(g, h)) 
@@ -183,13 +183,13 @@ addX(2)(1) // 3
 
 它首先是一种范畴，也就是说，是一个容器，包含了值和变形关系。**比较特殊的是，它的变形关系可以依次作用于每一个值，将当前容器变形成另一个容器。**
 
-![](http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022203.png)
+![](http://omqz8y2im.bkt.clouddn.com/bg2017022203.png)
 
 上图中，左侧的圆圈就是一个函子，表示人名的范畴。外部传入函数f，会转成右边表示早餐的范畴。
 
 下面是一张更一般的图。
 
-![](http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022211.jpg)
+![](http://omqz8y2im.bkt.clouddn.com/bg2017022211.jpg)
 
 上图中，函数`f`完成值的转换（`a`到`b`），将它传入函子，就可以实现范畴的转换（`Fa`到`Fb`）。
 
