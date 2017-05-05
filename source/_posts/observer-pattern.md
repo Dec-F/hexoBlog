@@ -62,7 +62,7 @@ inputNode.dispatchEvent(eve);
     node.emit('test')
 ```
 
-多么简单而标准的观察者模式，下面我们来实现这样一个模式
+下面我们来实现这样一个模式
 
 ```js
 //事件构造函数
