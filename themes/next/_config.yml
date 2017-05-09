@@ -6,7 +6,7 @@
 favicon: http://omqz8y2im.bkt.clouddn.com/favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "Dec_fan"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -275,7 +275,7 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-duoshuo_shortname: strongfanfan
+# duoshuo_shortname: strongfanfan
 
 # Disqus
 #disqus_shortname:
@@ -284,7 +284,7 @@ duoshuo_shortname: strongfanfan
 #hypercomments_id:
 
 # Gentie productKey
-#gentie_productKey:
+gentie_productKey: 85c55bdbae10401399f1f77b16e307ef
 
 # Support for youyan comments system.
 # You can get your uid from http://www.uyan.cc
