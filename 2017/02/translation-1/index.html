@@ -1,0 +1,917 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,函数式编程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://omqz8y2im.bkt.clouddn.com/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文译自原文链接 考虑到句子通顺，以及本人语言水平有限，有些地方没有按照原文直译。容易引起误解的地方都贴上原文了。">
+<meta name="keywords" content="JavaScript,函数式编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代Javascript纵览--外文搬运系列（一）">
+<meta property="og:url" content="http://blog.strongfanfan.top/2017/02/translation-1/index.html">
+<meta property="og:site_name" content="No Bug,No Jump">
+<meta property="og:description" content="本文译自原文链接 考虑到句子通顺，以及本人语言水平有限，有些地方没有按照原文直译。容易引起误解的地方都贴上原文了。">
+<meta property="og:updated_time" content="2017-06-17T02:30:30.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="现代Javascript纵览--外文搬运系列（一）">
+<meta name="twitter:description" content="本文译自原文链接 考虑到句子通顺，以及本人语言水平有限，有些地方没有按照原文直译。容易引起误解的地方都贴上原文了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.strongfanfan.top/2017/02/translation-1/"/>
+
+
+
+
+
+  <title> 现代Javascript纵览--外文搬运系列（一） | No Bug,No Jump </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-93665013-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">No Bug,No Jump</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reading">
+          <a href="/reading" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/02/translation-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="久渡">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="No Bug,No Jump">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="No Bug,No Jump" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                现代Javascript纵览--外文搬运系列（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T11:45:50+08:00">
+                2017-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Translation/" itemprop="url" rel="index">
+                    <span itemprop="name">Translation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/02/translation-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/translation-1/" class="leancloud_visitors" data-flag-title="现代Javascript纵览--外文搬运系列（一）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">views </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>本文译自<a href="https://auth0.com/blog/glossary-of-modern-javascript-concepts/" target="_blank" rel="external">原文链接</a></strong></p>
+<p><strong>考虑到句子通顺，以及本人语言水平有限，有些地方没有按照原文直译。容易引起误解的地方都贴上原文了。</strong></p>
+<a id="more"></a>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="纯函数（Pure-Functions）"><a href="#纯函数（Pure-Functions）" class="headerlink" title="纯函数（Pure Functions）"></a>纯函数（Pure Functions）</h3><p>一个纯函数的返回值仅由它决定的输入值，无副作用（参数）。当给定的相同的参数，结果将始终是相同的。下面是一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add10</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> a+<span class="number">10</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该add(a)函数接受一个数字a并返回与10相加的值。</p>
+<p>如果我们传递的参数8给这个函数，该函数总是返回18。</p>
+<p>对于一个确定的参数，纯函数会返回一个确定的值，不依赖和改变外部状态。</p>
+<p>纯函数不能从父范围内引用变量，除非他们明确地传递给函数作为参数。即使这样，该函数可以不修改外部状态。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num=<span class="number">10</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add10</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> num+<span class="number">10</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//这就不是一个纯函数</span></div></pre></td></tr></table></figure></p>
+<p><strong>总结一下</strong></p>
+<ul>
+<li>纯函数必须有参数</li>
+<li>同样的输入有相同输出</li>
+<li>纯函数不依赖或者改变外部状态（注意console.log()改变全局状态）</li>
+<li>纯函数不产生副作用</li>
+<li>纯函数不能调用非纯函数</li>
+</ul>
+<h3 id="非纯函数（Impure-Functions）"><a href="#非纯函数（Impure-Functions）" class="headerlink" title="非纯函数（Impure Functions）"></a>非纯函数（Impure Functions）</h3><p>非纯函数会改变自身作用域以外的状态。一个函数运行时会改变外部状态（副作用），那么它就是非纯函数，没有返回值的函数也是非纯的。</p>
+<p>考虑下面的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// impure function producing a side effect</span></div><div class="line"><span class="comment">//非纯函数产生了副作用</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">showAlert</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  alert(<span class="string">'This is a side effect!'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// impure function mutating external state</span></div><div class="line"><span class="comment">// 非纯函数改变了外部变量</span></div><div class="line"><span class="keyword">var</span> globalVal = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">incrementGlobalVal</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">  globalVal += x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// impure function calling pure functions procedurally</span></div><div class="line"><span class="comment">// 调用纯函数的非纯函数（调用了console.log()才是重点，所以不太理解作者要表达什么）</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">proceduralFn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> result1 = pureFnFirst(<span class="number">1</span>);</div><div class="line">  <span class="keyword">const</span> result2 = pureFnLast(<span class="number">2</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`Done with <span class="subst">$&#123;result1&#125;</span> and <span class="subst">$&#123;result2&#125;</span>!`</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// impure function that resembles a pure function,</span></div><div class="line"><span class="comment">// but returns different results given the same inputs</span></div><div class="line"><span class="comment">//看起来像是一个纯函数，但是这个函数对同一输入会返回不同输出，所以是不纯函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomRange</span>(<span class="params">min, max</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * (max - min) + min;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h3><p>当一个功能或表达修改其自己的上下文之外的状态，其结果是一个副作用。</p>
+<p>副作用的例子包括制作一个API的调用，操纵DOM，抛出一个警告对话框，写入数据库等。如果功能产生副作用，它被认为是不纯的。引起副作用的函数是难以预料和难以测试，因为它们会导致以外的局部范围内变化。</p>
+<h2 id="状态和无状态"><a href="#状态和无状态" class="headerlink" title="状态和无状态"></a>状态和无状态</h2><p>状态指的是程序访问，并且可以在一个时间点上操作的信息。这包括存储在存储器中，以及OS的存储器，输入/输出端口，数据库等的数据。例如，变量在任何给定时刻的应用程序的内容是代表应用程序的的状态。</p>
+<h3 id="有状态（Stateful）"><a href="#有状态（Stateful）" class="headerlink" title="有状态（Stateful）"></a>有状态（Stateful）</h3><p>有状态的程序，应用程序或组件的数据存储在有关当前状态的内存。他们可以修改状态以及访问它的历史。下面的例子是有状态：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// stateful </span></div><div class="line"><span class="comment">//有状态</span></div><div class="line"><span class="keyword">var</span> number = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">increment</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> number++;</div><div class="line">&#125;</div><div class="line">increment(); <span class="comment">// global variable modified: number = 2</span></div><div class="line">            <span class="comment">//全局变量被更改</span></div></pre></td></tr></table></figure></p>
+<h3 id="无状态（Stateless）"><a href="#无状态（Stateless）" class="headerlink" title="无状态（Stateless）"></a>无状态（Stateless）</h3><p>无状态的函数和组件每一次执行都像是第一次执行。</p>
+<p>这意味着他们不引用或不在其执行前引用任何信息，无状态是引用透明。</p>
+<p>函数只依赖自身的参数而且不需要也不访问自身作用域外的任何东西。</p>
+<p>请看下面例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// stateless</span></div><div class="line"><span class="comment">//无状态</span></div><div class="line"><span class="keyword">var</span> number = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">increment</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> n + <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line">increment(number); <span class="comment">// global variable NOT modified: returns 2</span></div><div class="line">                    <span class="comment">//全局变量未改变</span></div></pre></td></tr></table></figure></p>
+<p>无状态应用程序仍然管理状态，然而他们是返回当前状态，而不不改变以前的状态（However, they return their current state without mutating previous state.怎么翻译都觉得别扭，贴上原文），这是函数式编程的一个宗旨。</p>
+<h2 id="不变性和可变性（Immutability-and-Mutability）"><a href="#不变性和可变性（Immutability-and-Mutability）" class="headerlink" title="不变性和可变性（Immutability and Mutability）"></a>不变性和可变性（Immutability and Mutability）</h2><p>JavaScript的不可变性和可变性的概念比其他一些编程语言更加模糊不清，然而当你阅读JS中的函数式编程时会听到很多不可变性的概念。知道这些概念是如何使用和在JavaScript中实现是非常重要的。简单的定义：</p>
+<h3 id="不可变性（Immutable）"><a href="#不可变性（Immutable）" class="headerlink" title="不可变性（Immutable）"></a>不可变性（Immutable）</h3><p>如果一个对象是不可变的。则它的值不能在创建以后修改。</p>
+<h3 id="可变性（Mutable）"><a href="#可变性（Mutable）" class="headerlink" title="可变性（Mutable）"></a>可变性（Mutable）</h3><p>如果一个对象是可变的。则它的值能在创建以后修改。</p>
+<h3 id="Javascript语言设计中的可变性和不可变性"><a href="#Javascript语言设计中的可变性和不可变性" class="headerlink" title="Javascript语言设计中的可变性和不可变性"></a>Javascript语言设计中的可变性和不可变性</h3><p>在JavaScript中，设计上，字符串和数字是不可变的。如果我们对它进行操作，下面的方法很容易理解。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> str = <span class="string">'Hello!'</span>;</div><div class="line"><span class="keyword">var</span> anotherStr = str.substring(<span class="number">2</span>);</div><div class="line"><span class="comment">// result: str = 'Hello!' (unchanged)</span></div><div class="line"><span class="comment">// result: anotherStr = 'llo!' (new string)</span></div></pre></td></tr></table></figure>
+<p>我们使用的方法并没有修改原始字符串。相反，它会创建一个新的字符串。我们可以给变量一个其他值，but once we’ve created our string, it will always be .</p>
+<p>数字最好也是不变性的。下面代码始终具有相同的结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> three = <span class="number">1</span> + <span class="number">2</span>;</div><div class="line"><span class="comment">// result: three = 3</span></div></pre></td></tr></table></figure></p>
+<p>这表明，不变性在JavaScript的设计中确实存在。然而，JS开发人员都知道，JS中大部分是可变的。例如，对象和数组设计可变的。考虑以下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">arr.push(<span class="number">4</span>);</div><div class="line"><span class="comment">// result: arr = [1, 2, 3, 4]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">greeting</span>: <span class="string">'Hello'</span> &#125;;</div><div class="line">obj.name = <span class="string">'Jon'</span>;</div><div class="line"><span class="comment">// result: obj = &#123; greeting: 'Hello', name: 'Jon' &#125;</span></div></pre></td></tr></table></figure>
+<p>在这些例子中，原始的对象被改变。没有返回新的对象；</p>
+<p>要了解更多关于其他语言的可变性，分辨出什么是可变，什么是不可变。</p>
+<h3 id="JavaScript实践中不变性"><a href="#JavaScript实践中不变性" class="headerlink" title="JavaScript实践中不变性"></a>JavaScript实践中不变性</h3><p>函数式编程在JavaScript中获得了大量的关注。但是在设计上，JS是一个非常易变的，多范型的语言。函数式编程强调不变性。当开发人员试图改变不可变对象时将引发错误。所以写函数式程序时我们怎么能调和JS与生俱来的可变性？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/函数式编程/" rel="tag"># 函数式编程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/LinkedList/" rel="next" title="Javascript链表结构的实践">
+                <i class="fa fa-chevron-left"></i> Javascript链表结构的实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/Reproduced1/" rel="prev" title="函数式编程入门(阮一峰) -- 转载（一）">
+                函数式编程入门(阮一峰) -- 转载（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png"
+               alt="久渡" />
+          <p class="site-author-name" itemprop="name">久渡</p>
+          <p class="site-description motion-element" itemprop="description">吃饭，睡觉，改bug</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/strongfanfan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/fanxuehui" target="_blank" title="SegFault">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  SegFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/strongfanfan" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://strongfanfan.top" target="_blank" title="简历">
+                  
+                    <i class="fa fa-fw fa-newspaper-o"></i>
+                  
+                  简历
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数（Pure-Functions）"><span class="nav-number">1.1.</span> <span class="nav-text">纯函数（Pure Functions）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非纯函数（Impure-Functions）"><span class="nav-number">1.2.</span> <span class="nav-text">非纯函数（Impure Functions）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#副作用"><span class="nav-number">1.3.</span> <span class="nav-text">副作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态和无状态"><span class="nav-number">2.</span> <span class="nav-text">状态和无状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有状态（Stateful）"><span class="nav-number">2.1.</span> <span class="nav-text">有状态（Stateful）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无状态（Stateless）"><span class="nav-number">2.2.</span> <span class="nav-text">无状态（Stateless）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不变性和可变性（Immutability-and-Mutability）"><span class="nav-number">3.</span> <span class="nav-text">不变性和可变性（Immutability and Mutability）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不可变性（Immutable）"><span class="nav-number">3.1.</span> <span class="nav-text">不可变性（Immutable）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变性（Mutable）"><span class="nav-number">3.2.</span> <span class="nav-text">可变性（Mutable）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript语言设计中的可变性和不可变性"><span class="nav-number">3.3.</span> <span class="nav-text">Javascript语言设计中的可变性和不可变性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript实践中不变性"><span class="nav-number">3.4.</span> <span class="nav-text">JavaScript实践中不变性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">久渡</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "85c55bdbae10401399f1f77b16e307ef",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RCevw1YKRxYWTle01PNeyQ1Q-gzGzoHsz", "JSJLmsffsw14wNUbjwnQaEi8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

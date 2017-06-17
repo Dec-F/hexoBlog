@@ -1,0 +1,1036 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="video,HTML5," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://omqz8y2im.bkt.clouddn.com/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近想做一个弹幕插件，查了很多video标签的属性和方法 error属性   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：  MEDIA_ERR_ABORTED(数字值为1)，媒体数据的下载过程由于用户的操作原因而被终止">
+<meta name="keywords" content="video,HTML5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="video标签的属性和方法总结">
+<meta property="og:url" content="http://blog.strongfanfan.top/2017/01/video标签的属性和方法总结/index.html">
+<meta property="og:site_name" content="No Bug,No Jump">
+<meta property="og:description" content="最近想做一个弹幕插件，查了很多video标签的属性和方法 error属性   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：  MEDIA_ERR_ABORTED(数字值为1)，媒体数据的下载过程由于用户的操作原因而被终止">
+<meta property="og:updated_time" content="2017-06-17T02:30:30.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="video标签的属性和方法总结">
+<meta name="twitter:description" content="最近想做一个弹幕插件，查了很多video标签的属性和方法 error属性   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：  MEDIA_ERR_ABORTED(数字值为1)，媒体数据的下载过程由于用户的操作原因而被终止">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.strongfanfan.top/2017/01/video标签的属性和方法总结/"/>
+
+
+
+
+
+  <title> video标签的属性和方法总结 | No Bug,No Jump </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-93665013-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">No Bug,No Jump</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reading">
+          <a href="/reading" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/01/video标签的属性和方法总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="久渡">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="No Bug,No Jump">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="No Bug,No Jump" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                video标签的属性和方法总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-15T17:54:34+08:00">
+                2017-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML5/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML5</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/01/video标签的属性和方法总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/video标签的属性和方法总结/" class="leancloud_visitors" data-flag-title="video标签的属性和方法总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">views </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近想做一个弹幕插件，查了很多video标签的属性和方法</p>
+<h3 id="error属性"><a href="#error属性" class="headerlink" title="error属性"></a>error属性</h3><p>   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：</p>
+<ul>
+<li><code>MEDIA_ERR_ABORTED(数字值为1)</code>，媒体数据的下载过程由于用户的操作原因而被终止。</li>
+</ul>
+<ul>
+<li><p><code>MEDIA_ERR_NETWORK(数字值为2)</code>，确认媒体资源可用，但是在下载出现网络错误，媒体数据的下载过程被中止。</p>
+<a id="more"></a>
+</li>
+<li><p><code>MEDIA_ERR_DECODE(数字值为3)</code>，确认媒体资源可用，但是解码时发生错误。</p>
+</li>
+<li><code>MEDIA_ERR_SRC_NOT_SUPPORTED(数字值为4)</code>，媒体资源不可用或媒体格式不被支持。<br>代码如下：<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;video src=<span class="string">""</span> id=<span class="string">"videoElement"</span>&gt;&lt;/video&gt;</div><div class="line"> <span class="keyword">var</span> video = <span class="built_in">document</span>.getElementById(<span class="string">"videoElement"</span>);</div><div class="line"> video.addEventListener(<span class="string">"error"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="keyword">var</span> error = video.error;</div><div class="line">     swicth(error.code) &#123;</div><div class="line">         <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">            alert(<span class="string">"视频的下载过程被中止"</span>);</div><div class="line">         <span class="keyword">break</span>;</div><div class="line"> </div><div class="line">         <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">            alert(<span class="string">"网络发生故障，视频的下载过程被中止"</span>);</div><div class="line">         <span class="keyword">break</span>;</div><div class="line"> </div><div class="line">         <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">            alert(<span class="string">"解码失败"</span>);</div><div class="line">         <span class="keyword">break</span>;</div><div class="line"> </div><div class="line">         <span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">            alert(<span class="string">"媒体资源不可用或媒体格式不被支持"</span>);</div><div class="line">         <span class="keyword">break</span>; </div><div class="line"> </div><div class="line">     &#125;</div><div class="line"> &#125;,<span class="literal">false</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="networkState属性"><a href="#networkState属性" class="headerlink" title="networkState属性"></a>networkState属性</h3><p>在媒体数据加载过程中可以使用video元素或audio元素的networkState属性读取当前网络状态，共有4个可能的值；<br>1．  NETWORK_EMPTY（数字值为0）：元素处于初始状态。<br>2．  NETWORK_IDLE(数字值为1)，浏览器已选择好用什么编码格式来播放媒体，但是尚未建立网络连接。<br>3．  NETWORK_LOADING(数字值为2)：媒体数据加载中<br>4．  NETWORK_NO_SOURCE(数字值为3)，没有支持的编码格式，不执行加载。</p>
+<h3 id="currentTime属性与duration属性"><a href="#currentTime属性与duration属性" class="headerlink" title="currentTime属性与duration属性"></a>currentTime属性与duration属性</h3><p>video元素或audio元素的currentTime属性来读取媒体的当前播放位置(单位是s)，也可以通过修改currentTime属性来修改当前播放位置，如果修改的位置上没有可用的媒体数据时，将抛出INVALID_STATE_ERR异常；<br>video元素或audio元素的duration属性来读取媒体文件总的播放时间。<br>我们可以来做demo如下：<br>HTML代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="string">640</span> <span class="attr">height</span>=<span class="string">360</span> <span class="attr">autoplay</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogg; codecs="</span><span class="attr">theora</span>, <span class="attr">vorbis</span>""/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Video is not visible, most likely your browser does not support HTML5 video<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"getCurTime()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>获得当前时间的位置<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"setCurTime()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>把时间位置设置为 5 秒<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"duration()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>读取媒体文件总的播放时间<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>JS代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVid=<span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurTime</span>(<span class="params"></span>)</span>&#123; </div><div class="line">    <span class="comment">// 获得当前视频或者音频时间的位置</span></div><div class="line">    alert(myVid.currentTime);   </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCurTime</span>(<span class="params"></span>)</span>&#123; </div><div class="line"><span class="comment">// 给当前的视频或者音频设置5s时间的位置</span></div><div class="line">    myVid.currentTime=<span class="number">5</span>;        </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">duration</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//读取媒体文件总的播放时间 单位为S</span></div><div class="line">    alert(myVid.duration); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大家可以复制代码，换一张视频地址就可以看到效果了~；</p>
+<h3 id="played属性，paused属性与ended属性"><a href="#played属性，paused属性与ended属性" class="headerlink" title="played属性，paused属性与ended属性"></a>played属性，paused属性与ended属性</h3><ul>
+<li>played：video元素或audio元素的played属性来返回一个TimeRanges对象，从该对象中可以读取媒体文件的已播放部分的时间段。开始时间为已播放部分的开始时间，结束时间为已播放部分的结束时间。</li>
+<li>paused属性：使用video元素或audio元素的paused属性来返回一个布尔值，表示是否处于暂停播放中，true表示媒体暂停播放，false表示媒体正在播放；</li>
+<li>ended属性：使用video元素或audio元素的ended属性来返回一个布尔值，表示是否播放完毕，true表示媒体播放完毕，false表示媒体还没有播放完毕。<br>HTML代码如下：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="string">640</span> <span class="attr">height</span>=<span class="string">360</span> <span class="attr">autoplay</span> <span class="attr">loop</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogg; codecs="</span><span class="attr">theora</span>, <span class="attr">vorbis</span>""/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> &gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Video is not visible, most likely your browser does not support HTML5 video<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"played()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>读取媒体文件的已播放部分的时间段<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"paused()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>是否处于暂停播放<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"ended()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>是否播放完毕<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>JS代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVid=<span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">played</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//读取媒体文件的已播放部分的时间段</span></div><div class="line">    <span class="built_in">console</span>.log(myVid.played);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">paused</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 是否处于暂停播放</span></div><div class="line">    alert(myVid.paused);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ended</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 是否播放完毕</span></div><div class="line">    alert(myVid.ended);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="defaultPlaybackRate属性与playbackRate属性"><a href="#defaultPlaybackRate属性与playbackRate属性" class="headerlink" title="defaultPlaybackRate属性与playbackRate属性"></a>defaultPlaybackRate属性与playbackRate属性</h3><ul>
+<li>defaultPlaybackRate属性：可以使用video元素或者audio元素的defaultPlaybackRate属性读取或修改媒体默认的播放速率。</li>
+<li>playbackRate属性：可以使用video元素或者audio元素的playbackRate属性读取或修改媒体当前的播放速率。<h3 id="volume属性与muted属性"><a href="#volume属性与muted属性" class="headerlink" title="volume属性与muted属性"></a>volume属性与muted属性</h3></li>
+<li>volume属性：使用video元素或audio元素的volume属性读取或修改媒体的播放音量，范围为0到1,0为静音，1为最大音量。</li>
+<li>muted属性：使用video元素或audio元素的muted属性读取或修改媒体的静音状态，该值为布尔值，true表示处于静音状态，false表示处于非静音状态。<br>HTML代码如下：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="string">640</span> <span class="attr">height</span>=<span class="string">360</span> <span class="attr">autoplay</span> <span class="attr">loop</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogg; codecs="</span><span class="attr">theora</span>, <span class="attr">vorbis</span>""/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Video is not visible, most likely your browser does not support HTML5 video<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"volume()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>读取或修改媒体的播放音量<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"muted()"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span>读取或修改媒体当前的静音状态<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>JS代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVid=<span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">volume</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 读取或修改媒体的播放音量</span></div><div class="line">    myVid.volume = <span class="number">0.1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">muted</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//读取或修改媒体当前的静音状态</span></div><div class="line">    myVid.muted = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大家可以使用下，当我点击”读取或修改媒体的播放音量”按钮时候，声音会变的很小，当我点击”读取或修改媒体当前的静音状态”按钮时候，视频完全就没有声音。</p>
+<p>###方法<br>video元素与audio元素有以下四种方法；</p>
+<ul>
+<li>play方法：使用play方法来播放媒体，自动将元素的paused属性的值变为false。</li>
+<li>pause方法：使用pause方法来暂停播放，自动将元素的paused属性的值变为true。</li>
+<li>load方法，使用load方法来重新载入媒体进行播放，自动将元素的playbackRate属性的值变为defaultPlaybackRate属性的值，自动将元素的error的值变为null。<br>下面是播放和暂停的demo如下：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="string">640</span> <span class="attr">height</span>=<span class="string">360</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogg; codecs="</span><span class="attr">theora</span>, <span class="attr">vorbis</span>""/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Video is not visible, most likely your browser does not support HTML5 video<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"play()"</span>&gt;</span>播放<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"pause()"</span>&gt;</span>暂停<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>JS代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVid=<span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</div><div class="line"><span class="comment">// 监听视频播放结束的事件</span></div><div class="line">myVid.addEventListener(<span class="string">"ended"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"播放结束"</span>);</div><div class="line">&#125;,<span class="literal">true</span>);</div><div class="line"><span class="comment">// 发生错误</span></div><div class="line">myVid.addEventListener(<span class="string">"error"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">switch</span>(myVid.error.code) &#123;</div><div class="line">        <span class="keyword">case</span> <span class="number">1</span>: </div><div class="line">          alert(<span class="string">"视频的下载过程被中止"</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line"></div><div class="line">        <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">              alert(<span class="string">"网络发生故障，视频的下载过程被中止"</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line"></div><div class="line">        <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">              alert(<span class="string">"解码失败"</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line"></div><div class="line">        <span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">              alert(<span class="string">"不支持播放的视频格式"</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line"></div><div class="line">        <span class="keyword">default</span>:</div><div class="line">              alert(<span class="string">"发生未知错误"</span>);</div><div class="line">        &#125;</div><div class="line">&#125;,<span class="literal">false</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">play</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 播放视频</span></div><div class="line">    myVid.play();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pause</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 暂停播放</span></div><div class="line">    myVid.pause();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如上代码，默认的情况下是不自动播放，当我点击播放按钮时候，就播放，当我点击暂停按钮时候就停止当前的播放。</p>
+<ul>
+<li>canPlayType方法：<br>使用canPlayType方法来测试浏览器是否支持指定的媒体类型，该方法定义如下：<br><code>var support = videoElement.canPlayType(type);</code><br>videoElement表示页面上的video元素或audio元素，该方法使用一个参数type，该参数的指定方法与source元素的type参数的指定方法相同，用播放文件的MIME类型来指定，可以在指定的字符串中加上表示媒体编码格式的codes参数。<br>该方法可能返回的值如下所示：</li>
+</ul>
+<ol>
+<li>空字符串：表示浏览器不支持此种媒体类型。</li>
+<li>maybe: 表示浏览器可能支持此种媒体类型。</li>
+<li>probably： 表示浏览器确定支持此种媒体类型。<br>HTML代码如下：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="string">640</span> <span class="attr">height</span>=<span class="string">360</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogg; codecs="</span><span class="attr">theora</span>, <span class="attr">vorbis</span>""/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"Wildlife/Wildlife.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Video is not visible, most likely your browser does not support HTML5 video<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"canPlayType()"</span>&gt;</span>canPlayType方法<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>JS代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var myVid=document.getElementById("video");</div><div class="line">function canPlayType() &#123;</div><div class="line">    var support = myVid.canPlayType("video/webm");</div><div class="line">    console.log(support); // maybe</div><div class="line"></div><div class="line">    var support = myVid.canPlayType("video/ogg; codecs="theora, vorbis");</div><div class="line">    console.log(support); // probably</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><ol>
+<li>事件处理方式</li>
+</ol>
+<p>使用video元素或audio元素的事件方式有2种，第一种是监听的方式，使用video元素或audio元素的addEventListener方法来对事件的发生进行监听，该方法定义如下：<br><code>videoElement.addEventListener(type,listener,userCapture);</code></p>
+<p>如上的监听方式和我们的JS的监听的方式一样，不做详细介绍，我们来看看第二种事件监听方式是为javascript脚本中常见的获取事件句柄的方式，如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;video id=”” src=””  onplay=”begin()”&gt;<span class="xml"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">begin</span>(<span class="params"></span>)</span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事件</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">loadstart</td>
+<td style="text-align:center">浏览器开始在网上寻找媒体数据</td>
+</tr>
+<tr>
+<td style="text-align:center">progress</td>
+<td style="text-align:center">浏览器正在获取媒体数据</td>
+</tr>
+<tr>
+<td style="text-align:center">suspend</td>
+<td style="text-align:center">浏览器暂停获取媒体数据，但是下载过程中并没有正常结束</td>
+</tr>
+<tr>
+<td style="text-align:center">abort</td>
+<td style="text-align:center">浏览器在下载完全部媒体数据之前中止获取媒体数据，但是并不是由错误引起的</td>
+</tr>
+<tr>
+<td style="text-align:center">error</td>
+<td style="text-align:center">获取媒体数据过程中出错</td>
+</tr>
+<tr>
+<td style="text-align:center">emptied</td>
+<td style="text-align:center">暂不考虑，可以网上看</td>
+</tr>
+<tr>
+<td style="text-align:center">stalled</td>
+<td style="text-align:center">浏览器尝试获取媒体数据失败</td>
+</tr>
+<tr>
+<td style="text-align:center">play</td>
+<td style="text-align:center">即将开始播放，当执行了play方法时触发，或数据下载后元素被设为autoplay</td>
+</tr>
+<tr>
+<td style="text-align:center">pause</td>
+<td style="text-align:center">播放暂停，当执行了pause方法触发</td>
+</tr>
+<tr>
+<td style="text-align:center">loadedmetadata</td>
+<td style="text-align:center">浏览器获取完媒体的时长和字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">loadeddata</td>
+<td style="text-align:center">浏览器已加载完毕当前播放位置的媒体数据，准备播放</td>
+</tr>
+<tr>
+<td style="text-align:center">waiting</td>
+<td style="text-align:center">可以暂不看</td>
+</tr>
+<tr>
+<td style="text-align:center">playing</td>
+<td style="text-align:center">正在播放</td>
+</tr>
+<tr>
+<td style="text-align:center">canplay</td>
+<td style="text-align:center">浏览器能够播放媒体，但估计以当前播放速率不能直接将媒体播完，播放期间需要缓冲</td>
+</tr>
+<tr>
+<td style="text-align:center">canplaythrough</td>
+<td style="text-align:center">浏览器能够播放媒体，但估计以当前播放速率能将媒体播完，不再需要缓冲</td>
+</tr>
+<tr>
+<td style="text-align:center">seeking</td>
+<td style="text-align:center">Seeking变为true，表示浏览器正在请求数据</td>
+</tr>
+<tr>
+<td style="text-align:center">seeked</td>
+<td style="text-align:center">Seeking属性变为false，表面浏览器停止请求数据</td>
+</tr>
+<tr>
+<td style="text-align:center">timeupdate</td>
+<td style="text-align:center">当前播放位置发生改变，可能是播放过程中的自然改变，也可能是人为改变，或由于播放不能连续而发生的跳变。</td>
+</tr>
+<tr>
+<td style="text-align:center">ended</td>
+<td style="text-align:center">播放结束后停止播放</td>
+</tr>
+<tr>
+<td style="text-align:center">ratechange</td>
+<td style="text-align:center">DefaultplaybackRate属性或playbackRate属性发生改变</td>
+</tr>
+<tr>
+<td style="text-align:center">durationchange</td>
+<td style="text-align:center">播放时长发生改变</td>
+</tr>
+<tr>
+<td style="text-align:center">volumechange</td>
+<td style="text-align:center">volume属性或muted属性发生改变</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/video/" rel="tag"># video</a>
+          
+            <a href="/tags/HTML5/" rel="tag"># HTML5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/工具集/" rel="next" title="工具集">
+                <i class="fa fa-chevron-left"></i> 工具集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/高程笔记/" rel="prev" title="高级程序设计（第三版）笔记">
+                高级程序设计（第三版）笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png"
+               alt="久渡" />
+          <p class="site-author-name" itemprop="name">久渡</p>
+          <p class="site-description motion-element" itemprop="description">吃饭，睡觉，改bug</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/strongfanfan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/fanxuehui" target="_blank" title="SegFault">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  SegFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/strongfanfan" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://strongfanfan.top" target="_blank" title="简历">
+                  
+                    <i class="fa fa-fw fa-newspaper-o"></i>
+                  
+                  简历
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#error属性"><span class="nav-number">1.</span> <span class="nav-text">error属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#networkState属性"><span class="nav-number">2.</span> <span class="nav-text">networkState属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#currentTime属性与duration属性"><span class="nav-number">3.</span> <span class="nav-text">currentTime属性与duration属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#played属性，paused属性与ended属性"><span class="nav-number">4.</span> <span class="nav-text">played属性，paused属性与ended属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defaultPlaybackRate属性与playbackRate属性"><span class="nav-number">5.</span> <span class="nav-text">defaultPlaybackRate属性与playbackRate属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volume属性与muted属性"><span class="nav-number">6.</span> <span class="nav-text">volume属性与muted属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">7.</span> <span class="nav-text">事件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">久渡</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "85c55bdbae10401399f1f77b16e307ef",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RCevw1YKRxYWTle01PNeyQ1Q-gzGzoHsz", "JSJLmsffsw14wNUbjwnQaEi8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
