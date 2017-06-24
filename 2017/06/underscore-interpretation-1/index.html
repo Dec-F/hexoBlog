@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,向下一层," />
+  <meta name="keywords" content="JavaScript,underscore.js," />
 
 
 
@@ -84,17 +84,20 @@
 
 
 
-<meta name="description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
-<meta name="keywords" content="JavaScript,向下一层">
+<meta name="description" content="原发于github原文链接  一直断断续续看源码，奈何水平有限，效率极低，再加上懒癌作祟，看一天歇一周的节奏，一直没感觉有什么沉淀，这次来个细水长流，每天都看一点，有什么心得就来写一篇这个系列。 老实说，underscore这个库我是没用过的，所以需要先看接口。面向接口读源码可能会更容易找到切入点。">
+<meta name="keywords" content="JavaScript,underscore.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LHS&#x2F;RHS查询——向下一层系列（一）">
-<meta property="og:url" content="http://blog.strongfanfan.top/2017/02/LHS-RHS/index.html">
+<meta property="og:title" content="阅读underscore系列(一)--对象和函数两种接口风格的实现">
+<meta property="og:url" content="http://blog.strongfanfan.top/2017/06/underscore-interpretation-1/index.html">
 <meta property="og:site_name" content="No Bug,No Jump">
-<meta property="og:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
-<meta property="og:updated_time" content="2017-06-17T02:30:30.897Z">
+<meta property="og:description" content="原发于github原文链接  一直断断续续看源码，奈何水平有限，效率极低，再加上懒癌作祟，看一天歇一周的节奏，一直没感觉有什么沉淀，这次来个细水长流，每天都看一点，有什么心得就来写一篇这个系列。 老实说，underscore这个库我是没用过的，所以需要先看接口。面向接口读源码可能会更容易找到切入点。">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/underscore1-2.png">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/underscore1-3.png">
+<meta property="og:updated_time" content="2017-06-24T05:16:04.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LHS&#x2F;RHS查询——向下一层系列（一）">
-<meta name="twitter:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
+<meta name="twitter:title" content="阅读underscore系列(一)--对象和函数两种接口风格的实现">
+<meta name="twitter:description" content="原发于github原文链接  一直断断续续看源码，奈何水平有限，效率极低，再加上懒癌作祟，看一天歇一周的节奏，一直没感觉有什么沉淀，这次来个细水长流，每天都看一点，有什么心得就来写一篇这个系列。 老实说，underscore这个库我是没用过的，所以需要先看接口。面向接口读源码可能会更容易找到切入点。">
+<meta name="twitter:image" content="http://omqz8y2im.bkt.clouddn.com/underscore1-2.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.strongfanfan.top/2017/02/LHS-RHS/"/>
+  <link rel="canonical" href="http://blog.strongfanfan.top/2017/06/underscore-interpretation-1/"/>
 
 
 
 
 
-  <title> LHS/RHS查询——向下一层系列（一） | No Bug,No Jump </title>
+  <title> 阅读underscore系列(一)--对象和函数两种接口风格的实现 | No Bug,No Jump </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/02/LHS-RHS/">
+  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/06/underscore-interpretation-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="久渡">
@@ -294,7 +297,7 @@
             
             
               
-                LHS/RHS查询——向下一层系列（一）
+                阅读underscore系列(一)--对象和函数两种接口风格的实现
               
             
           </h1>
@@ -309,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T16:15:07+08:00">
-                2017-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-24T13:07:35+08:00">
+                2017-06-24
               </time>
             
 
@@ -332,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/源码阅读笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">源码阅读笔记</span>
                   </a>
                 </span>
 
@@ -350,7 +353,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/02/LHS-RHS/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/underscore-interpretation-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -361,7 +364,7 @@
 
           
           
-             <span id="/2017/02/LHS-RHS/" class="leancloud_visitors" data-flag-title="LHS/RHS查询——向下一层系列（一）">
+             <span id="/2017/06/underscore-interpretation-1/" class="leancloud_visitors" data-flag-title="阅读underscore系列(一)--对象和函数两种接口风格的实现">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -389,21 +392,29 @@
 
       
         <blockquote>
-<p>这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。</p>
-<p>由于经验还很少，不对的地方，感谢指正</p>
+<p>原发于github<a href="https://github.com/strongfanfan/underscore-interpretation/issues/1" target="_blank" rel="external">原文链接</a></p>
 </blockquote>
-<p>本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> imageArr=[],newData=[];</div><div class="line"></div><div class="line">imageArr=imageArr+newData;</div></pre></td></tr></table></figure></p>
-<p>现在看着很正常，但当时想为什么左侧的<code>imageArr</code>是赋值，右面是取值，出现在一个表达式是怎么运算的呢。</p>
-<p>这里就是JavaScript中的LHS和RHS查询的区别。<br><a id="more"></a></p>
-<p><strong>简单来说，赋值运算的左侧会执行LHS查询，右侧则执行RHS查询。</strong></p>
-<ul>
-<li>LHS是寻找一个容器（地址），用来存放数值。</li>
-<li>RHS是寻找一个源值，即 “取得某某的值” 。</li>
-</ul>
-<p>更重要的是，在很多地方，赋值运算并不是显式的，例如形参</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">par</span>)</span>&#123;</div><div class="line">    alert(par)</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(<span class="number">22</span>)</div></pre></td></tr></table></figure>
-<p>最后调用<code>test()</code>并传参时，会先进行一次LHS查询，声明一个变量为par，并把22赋值给par；<br><code>alert(par)</code>时执行一次RHS查询。</p>
-<p>其实在调用<code>test()</code>时也是一次RHS查询</p>
+<p>一直断断续续看源码，奈何水平有限，效率极低，再加上懒癌作祟，看一天歇一周的节奏，一直没感觉有什么沉淀，这次来个细水长流，每天都看一点，有什么心得就来写一篇这个系列。</p>
+<p>老实说，underscore这个库我是没用过的，所以需要先看接口。面向接口读源码可能会更容易找到切入点。<br><a id="more"></a></p>
+<p>今天是第一篇，就写一下underscore的接口风格。<br>它支持以下写法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_.map([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123; <span class="keyword">return</span> n * <span class="number">2</span>; &#125;);</div><div class="line">_([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).map(<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123; <span class="keyword">return</span> n * <span class="number">2</span>; &#125;);</div></pre></td></tr></table></figure></p>
+<p>面向对象和函数风格都可以接受。下面结合源码，来说一下实现。</p>
+<h3 id="是什么"><a href="#是什么" class="headerlink" title="_ 是什么"></a><code>_</code> 是什么</h3><p><code>_</code>其实还是个函数，且是个构造函数。<code>_</code>可以当作对象使用，因为JS中，一切皆对象。而underscore的所用方法都挂载在<code>_</code>下。</p>
+<p>源码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> _ = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> _) <span class="keyword">return</span> obj;</div><div class="line">    <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> _)) <span class="keyword">return</span> <span class="keyword">new</span> _(obj);</div><div class="line">    <span class="keyword">this</span>._wrapped = obj;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure></p>
+<p>可以看到当使用函数<code>_()</code>调用时，实际上是将<code>_</code>当作构造函数调用,并返回一个含有<code>_wrapped</code>的实例。</p>
+<h3 id="函数式调用时发生了什么"><a href="#函数式调用时发生了什么" class="headerlink" title="函数式调用时发生了什么"></a>函数式调用时发生了什么</h3><p>这个问题，我们就单独把上面的代码跑一下和原来的对比（自己写的用 <code>$()</code> 代替，和 <code>_()</code> 区分）</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/underscore1-2.png" alt=""><br><img src="http://omqz8y2im.bkt.clouddn.com/underscore1-3.png" alt=""></p>
+<p>可以看到underscore的方法是挂载在实例的原型对象上，即<code>_().__proto__</code></p>
+<p>而我copy过来的方法是挂载在构造函数上的，即<code>$().__proto__.constructor</code>。其实就是上面说的 <code>_</code> 这个函数上，这时调用<code>$().map()</code>肯定会报错。</p>
+<p>报错是因为方法没有在原型链上找到，先解决掉。其实就是把挂在<code>$.</code>上的方法一一映射到<code>$.prototype</code>上。</p>
+<p>源码中就是这样解决的，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 便于理解，对源码略微修改了一下</span></div><div class="line"><span class="comment">// Add your own custom functions to the Underscore object.</span></div><div class="line"><span class="comment">// _.functions(obj)方法是把obj对象上的方法映射为一个数组，包含了所有obj下的方法名</span></div><div class="line"></div><div class="line"> _.mixin = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">   _.each(_.functions(obj), <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> func = _[name] = obj[name];</div><div class="line">     _.prototype[name] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="keyword">var</span> args = [<span class="keyword">this</span>._wrapped];</div><div class="line">      <span class="built_in">Array</span>.prototype.push.apply(args, <span class="built_in">arguments</span>);</div><div class="line">       <span class="keyword">return</span>  func.apply( _ , args);</div><div class="line">     &#125;;</div><div class="line">   &#125;);</div><div class="line"> &#125;;</div><div class="line"></div><div class="line"> <span class="comment">// Add all of the Underscore functions to the wrapper object.</span></div><div class="line"> _.mixin(_);</div></pre></td></tr></table></figure>
+<p>可以看到在<code>_.prototype</code>下的方法和在<code>_</code>下的方法实现是不一样的，多了一层调用。</p>
+<p>本质上函数式调用是对象式调用的语法糖，自动将<code>_()._wrapped</code>对象传进方法作为第一个参数，并调用对应函数。</p>
+<p>这种形式的接口优雅且实现也不难，很值得我们借鉴和使用。</p>
+<hr>
+<blockquote>
+<p>第一篇<code>underscore.js</code>源码阅读心得系列。以后会不定期更新，感兴趣的同学可以点watch，一起探讨问题。</p>
+</blockquote>
 
       
     </div>
@@ -429,7 +440,7 @@
           
             <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            <a href="/tags/向下一层/" rel="tag"># 向下一层</a>
+            <a href="/tags/underscore-js/" rel="tag"># underscore.js</a>
           
         </div>
       
@@ -438,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/npm插件开发之旅/" rel="next" title="npm插件开发之旅">
-                <i class="fa fa-chevron-left"></i> npm插件开发之旅
+              <a href="/2017/06/tree-edit/" rel="next" title="项目中可编辑Tree结构的最佳实践">
+                <i class="fa fa-chevron-left"></i> 项目中可编辑Tree结构的最佳实践
               </a>
             
           </div>
@@ -448,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/LinkedList/" rel="prev" title="Javascript链表结构的实践">
-                Javascript链表结构的实践 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/underscore-interpretation-2/" rel="prev" title="阅读underscore系列（二）--类型检查">
+                阅读underscore系列（二）--类型检查 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -499,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png"
@@ -594,6 +614,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.</span> <span class="nav-text">_ 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式调用时发生了什么"><span class="nav-number">2.</span> <span class="nav-text">函数式调用时发生了什么</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

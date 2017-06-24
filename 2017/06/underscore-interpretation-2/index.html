@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,向下一层," />
+  <meta name="keywords" content="JavaScript,underscore.js," />
 
 
 
@@ -84,17 +84,21 @@
 
 
 
-<meta name="description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
-<meta name="keywords" content="JavaScript,向下一层">
+<meta name="description" content="原发于github。原文链接  Javascript作为一门动态语言，类型检查无论是在工具库或者业务中都是经常用到。 先来了解一下常用的几种方法">
+<meta name="keywords" content="JavaScript,underscore.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LHS&#x2F;RHS查询——向下一层系列（一）">
-<meta property="og:url" content="http://blog.strongfanfan.top/2017/02/LHS-RHS/index.html">
+<meta property="og:title" content="阅读underscore系列（二）--类型检查">
+<meta property="og:url" content="http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/index.html">
 <meta property="og:site_name" content="No Bug,No Jump">
-<meta property="og:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
-<meta property="og:updated_time" content="2017-06-17T02:30:30.897Z">
+<meta property="og:description" content="原发于github。原文链接  Javascript作为一门动态语言，类型检查无论是在工具库或者业务中都是经常用到。 先来了解一下常用的几种方法">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/underscore2-1.png">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/underscore2-2.png">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/underscore2-3.png">
+<meta property="og:updated_time" content="2017-06-24T05:15:57.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LHS&#x2F;RHS查询——向下一层系列（一）">
-<meta name="twitter:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
+<meta name="twitter:title" content="阅读underscore系列（二）--类型检查">
+<meta name="twitter:description" content="原发于github。原文链接  Javascript作为一门动态语言，类型检查无论是在工具库或者业务中都是经常用到。 先来了解一下常用的几种方法">
+<meta name="twitter:image" content="http://omqz8y2im.bkt.clouddn.com/underscore2-1.png">
 
 
 
@@ -122,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.strongfanfan.top/2017/02/LHS-RHS/"/>
+  <link rel="canonical" href="http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/"/>
 
 
 
 
 
-  <title> LHS/RHS查询——向下一层系列（一） | No Bug,No Jump </title>
+  <title> 阅读underscore系列（二）--类型检查 | No Bug,No Jump </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/02/LHS-RHS/">
+  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="久渡">
@@ -294,7 +298,7 @@
             
             
               
-                LHS/RHS查询——向下一层系列（一）
+                阅读underscore系列（二）--类型检查
               
             
           </h1>
@@ -309,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T16:15:07+08:00">
-                2017-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-24T13:07:35+08:00">
+                2017-06-24
               </time>
             
 
@@ -332,8 +336,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/源码阅读笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">源码阅读笔记</span>
                   </a>
                 </span>
 
@@ -350,7 +354,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/02/LHS-RHS/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/underscore-interpretation-2/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -361,7 +365,7 @@
 
           
           
-             <span id="/2017/02/LHS-RHS/" class="leancloud_visitors" data-flag-title="LHS/RHS查询——向下一层系列（一）">
+             <span id="/2017/06/underscore-interpretation-2/" class="leancloud_visitors" data-flag-title="阅读underscore系列（二）--类型检查">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -389,21 +393,34 @@
 
       
         <blockquote>
-<p>这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。</p>
-<p>由于经验还很少，不对的地方，感谢指正</p>
+<p>原发于github。<a href="https://github.com/strongfanfan/underscore-interpretation/issues/2" target="_blank" rel="external">原文链接</a></p>
 </blockquote>
-<p>本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> imageArr=[],newData=[];</div><div class="line"></div><div class="line">imageArr=imageArr+newData;</div></pre></td></tr></table></figure></p>
-<p>现在看着很正常，但当时想为什么左侧的<code>imageArr</code>是赋值，右面是取值，出现在一个表达式是怎么运算的呢。</p>
-<p>这里就是JavaScript中的LHS和RHS查询的区别。<br><a id="more"></a></p>
-<p><strong>简单来说，赋值运算的左侧会执行LHS查询，右侧则执行RHS查询。</strong></p>
-<ul>
-<li>LHS是寻找一个容器（地址），用来存放数值。</li>
-<li>RHS是寻找一个源值，即 “取得某某的值” 。</li>
-</ul>
-<p>更重要的是，在很多地方，赋值运算并不是显式的，例如形参</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">par</span>)</span>&#123;</div><div class="line">    alert(par)</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(<span class="number">22</span>)</div></pre></td></tr></table></figure>
-<p>最后调用<code>test()</code>并传参时，会先进行一次LHS查询，声明一个变量为par，并把22赋值给par；<br><code>alert(par)</code>时执行一次RHS查询。</p>
-<p>其实在调用<code>test()</code>时也是一次RHS查询</p>
+<p>Javascript作为一门动态语言，类型检查无论是在工具库或者业务中都是经常用到。</p>
+<p>先来了解一下常用的几种方法<br><a id="more"></a></p>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="external">MDN-typeof</a></p>
+<p>typeof返回一个字符串。返回值如下：<br><img src="http://omqz8y2im.bkt.clouddn.com/underscore2-1.png" alt=""></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="string">''</span>; <span class="comment">// string 有效</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">1</span>; <span class="comment">// number 有效</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">true</span>; <span class="comment">//boolean 有效</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>; <span class="comment">//undefined 有效</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">//object 无效</span></div><div class="line"><span class="keyword">typeof</span> [] ; <span class="comment">//object 无效</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Function</span>(); <span class="comment">// function 有效</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Date</span>(); <span class="comment">//object 无效</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(); <span class="comment">//object 无效</span></div></pre></td></tr></table></figure>
+<p>typeof 可以对JS基础数据类型做出准确的判断,但是对引用类型和null的判断就无能为力了</p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof" target="_blank" rel="external">MDN-instanceof</a></p>
+<p>instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">//true</span></div><div class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">//true</span></div></pre></td></tr></table></figure>
+<p>就如上面测试的一样，instanceof 虽然可以准确的检测出引用类型的值，但是它是基于原型链的，这就造成了所用引用类型都是Object的实例。</p>
+<p>那么问题来了，Object怎么检测？可能需要判断每一种引用类型，全部返回<code>false</code>，才能判断它是Object类型。心累。</p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p><img src="http://omqz8y2im.bkt.clouddn.com/underscore2-2.png" alt=""></p>
+<p>看似很美好是吧？但是<code>constructor</code>是不稳定的。因为<code>prototype</code>被重写以后，<code>constructor</code>会默认指向<code>Object</code>。如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Foo.prototype=&#123;<span class="attr">foo</span>:<span class="number">1</span>&#125;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> foo=<span class="keyword">new</span> Foo()</div><div class="line"></div><div class="line"> <span class="built_in">console</span>.log(foo.constructor) <span class="comment">//function Object() &#123;[native code] &#125;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h3><p>先来看下打印结果</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/underscore2-3.png" alt=""></p>
+<p><code>[object,Array]</code>第一个<code>Object</code>是数据类型，而包装类型机制的存在，基础类型都会显示<code>Object</code>，<code>null</code>和<code>undefined</code>比较特殊，也会返回<code>object</code>。第二项是数据的内部<code>[[Class]]</code>属性。</p>
+<blockquote>
+<p>所有 typeof 返回值为 “object” 的对象（如数组）都包含一个内部属性 [[Class]]（我们可 以把它看作一个内部的分类，而非传统的面向对象意义上的类） 。这个属性无法直接访问， 一般通过 Object.prototype.toString(..) 来查看。</p>
+</blockquote>
+<p>underscore.js中使用的就是这种方法，源码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//在1210行左右</span></div><div class="line"></div><div class="line"><span class="comment">//Arguments是用来兼容&lt;IE9</span></div><div class="line">_.each([<span class="string">'Arguments'</span>, <span class="string">'Function'</span>, <span class="string">'String'</span>, <span class="string">'Number'</span>, <span class="string">'Date'</span>, <span class="string">'RegExp'</span>, <span class="string">'Error'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">    _[<span class="string">'is'</span> + name] = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">'[object '</span> + name + <span class="string">']'</span>;</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<p>详细的了解了类型检查，借鉴一下underscore,js的方法，在业务中写类型检查再也不会战战兢兢的了</p>
 
       
     </div>
@@ -429,7 +446,7 @@
           
             <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            <a href="/tags/向下一层/" rel="tag"># 向下一层</a>
+            <a href="/tags/underscore-js/" rel="tag"># underscore.js</a>
           
         </div>
       
@@ -438,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/npm插件开发之旅/" rel="next" title="npm插件开发之旅">
-                <i class="fa fa-chevron-left"></i> npm插件开发之旅
+              <a href="/2017/06/underscore-interpretation-1/" rel="next" title="阅读underscore系列(一)--对象和函数两种接口风格的实现">
+                <i class="fa fa-chevron-left"></i> 阅读underscore系列(一)--对象和函数两种接口风格的实现
               </a>
             
           </div>
@@ -447,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/LinkedList/" rel="prev" title="Javascript链表结构的实践">
-                Javascript链表结构的实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png"
@@ -594,6 +616,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">3.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString"><span class="nav-number">4.</span> <span class="nav-text">Object.prototype.toString</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
