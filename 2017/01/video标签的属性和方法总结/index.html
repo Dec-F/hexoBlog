@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://blog.strongfanfan.top/2017/01/video标签的属性和方法总结/index.html">
 <meta property="og:site_name" content="No Bug,No Jump">
 <meta property="og:description" content="最近想做一个弹幕插件，查了很多video标签的属性和方法 error属性   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：  MEDIA_ERR_ABORTED(数字值为1)，媒体数据的下载过程由于用户的操作原因而被终止">
-<meta property="og:updated_time" content="2017-06-17T02:30:30.901Z">
+<meta property="og:updated_time" content="2017-08-17T01:07:33.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="video标签的属性和方法总结">
 <meta name="twitter:description" content="最近想做一个弹幕插件，查了很多video标签的属性和方法 error属性   在正常读取时候，使用媒体数据的过程中，video元素或audio元素的error属性为null，但是任何时候只要出现错误，error属性将返回一个MediaError对象，该对象的code返回对应的错误状态，共有4个可能值：  MEDIA_ERR_ABORTED(数字值为1)，媒体数据的下载过程由于用户的操作原因而被终止">
@@ -443,7 +443,7 @@
 </li>
 </ol>
 </blockquote>
-<p>JS代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var myVid=document.getElementById("video");</div><div class="line">function canPlayType() &#123;</div><div class="line">    var support = myVid.canPlayType("video/webm");</div><div class="line">    console.log(support); // maybe</div><div class="line"></div><div class="line">    var support = myVid.canPlayType("video/ogg; codecs="theora, vorbis");</div><div class="line">    console.log(support); // probably</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>JS代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myVid=<span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">canPlayType</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> support = myVid.canPlayType(<span class="string">"video/webm"</span>);</div><div class="line">    <span class="built_in">console</span>.log(support); <span class="comment">// maybe</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> support = myVid.canPlayType(<span class="string">"video/ogg; codecs="</span>theora, vorbis<span class="string">");</span></div><div class="line"><span class="string">    console.log(support); // probably</span></div><div class="line"><span class="string">&#125;</span></div></pre></td></tr></table></figure></p>
 <h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><ol>
 <li>事件处理方式</li>
 </ol>
@@ -665,7 +665,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -683,7 +683,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,1050 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://omqz8y2im.bkt.clouddn.com/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="作者：刘慰链接：https://www.zhihu.com/question/24696366/answer/29189700来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 国内绝大多数院校用的王珊的《数据库系统概论》这本教材，某些方面并没有给出很详细很明确的解释，与实际应用联系不那么紧密，你有这样的疑问也是挺正常的。我教《数据库原理》这门课有几年了，有很多学生提出">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关系型数据库概述--转载（二）">
+<meta property="og:url" content="http://blog.strongfanfan.top/2017/08/database-design/index.html">
+<meta property="og:site_name" content="No Bug,No Jump">
+<meta property="og:description" content="作者：刘慰链接：https://www.zhihu.com/question/24696366/answer/29189700来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 国内绝大多数院校用的王珊的《数据库系统概论》这本教材，某些方面并没有给出很详细很明确的解释，与实际应用联系不那么紧密，你有这样的疑问也是挺正常的。我教《数据库原理》这门课有几年了，有很多学生提出">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/24afd11455ac34a280fa83e4e8d75ccc_r.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/6b735fb9503b0930e741faa474fed28e_r.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/5b16f655b57a957bfa340d0a996a0eea_r.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/12513de20079d12b99d946072df7311a_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/10b52b39b18b8ea9fb17b46babf4d20f_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/51f8105fbbe92adaa3e343ea2db3bf49_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/51e2689ac9416a91800e63101bee9db7_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/2f4b4a887f6a61674a49d03d79e3fe17_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/44af74509a4e21372ed372be8560539d_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/5b20707ff3d9afb51ef7bfda726c3e34_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/8bca802bcff92a8945bf808d18d7ec62_b.jpg">
+<meta property="og:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/68d080d437732aad8cfe451b427849d6_b.jpg">
+<meta property="og:updated_time" content="2017-08-20T03:15:27.342Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关系型数据库概述--转载（二）">
+<meta name="twitter:description" content="作者：刘慰链接：https://www.zhihu.com/question/24696366/answer/29189700来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 国内绝大多数院校用的王珊的《数据库系统概论》这本教材，某些方面并没有给出很详细很明确的解释，与实际应用联系不那么紧密，你有这样的疑问也是挺正常的。我教《数据库原理》这门课有几年了，有很多学生提出">
+<meta name="twitter:image" content="http://omqz8y2im.bkt.clouddn.com/blog/database-design/24afd11455ac34a280fa83e4e8d75ccc_r.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.strongfanfan.top/2017/08/database-design/"/>
+
+
+
+
+
+  <title> 关系型数据库概述--转载（二） | No Bug,No Jump </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-93665013-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">No Bug,No Jump</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reading">
+          <a href="/reading" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.strongfanfan.top/2017/08/database-design/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="久渡">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="No Bug,No Jump">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="No Bug,No Jump" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关系型数据库概述--转载（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T09:27:40+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/08/database-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/08/database-design/" class="leancloud_visitors" data-flag-title="关系型数据库概述--转载（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">views </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>作者：刘慰<br>链接：<a href="https://www.zhihu.com/question/24696366/answer/29189700" target="_blank" rel="external">https://www.zhihu.com/question/24696366/answer/29189700</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>国内绝大多数院校用的王珊的《数据库系统概论》这本教材，某些方面并没有给出很详细很明确的解释，与实际应用联系不那么紧密，你有这样的疑问也是挺正常的。我教《数据库原理》这门课有几年了，有很多学生提出了和你一样的问题，试着给你解释一下吧。（基本来自于我上课的内容，某些地方为了不过于啰嗦，放弃了一定的严谨，主要是在“关系”和“表”上）</p>
+<p>首先要明白”范式（NF）”是什么意思。按照教材中的定义，范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。很晦涩吧？实际上你可以把它粗略地理解为一张数据表的表结构所符合的某种设计标准的级别。就像家里装修买建材，最环保的是E0级，其次是E1级，还有E2级等等。数据库范式也分为1NF，2NF，3NF，BCNF，4NF，5NF。一般在我们设计关系型数据库的时候，最多考虑到BCNF就够。符合高一级范式的设计，必定符合低一级范式，例如符合2NF的关系模式，必定符合1NF。</p>
+<a id="more"></a>
+<p>接下来就对每一级范式进行一下解释，首先是第一范式（1NF）。</p>
+<p>符合1NF的关系（你可以理解为数据表。“关系”和“关系模式”的区别，类似于面向对象程序设计中”类“与”对象“的区别。”关系“是”关系模式“的一个实例，你可以把”关系”理解为一张带数据的表，而“关系模式”是这张数据表的表结构。1NF的定义为：符合1NF的关系中的每个属性都不可再分。表1所示的情况，就不符合1NF的要求。</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/24afd11455ac34a280fa83e4e8d75ccc_r.jpg" alt=""><br>表1</p>
+<p>实际上，1NF是所有关系型数据库的最基本要求，你在关系型数据库管理系统（RDBMS），例如SQL Server，Oracle，MySQL中创建数据表的时候，如果数据表的设计不符合这个最基本的要求，那么操作一定是不能成功的。也就是说，只要在RDBMS中已经存在的数据表，一定是符合1NF的。如果我们要在RDBMS中表现表中的数据，就得设计为表2的形式：</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/6b735fb9503b0930e741faa474fed28e_r.jpg" alt=""><br>表2</p>
+<p>但是仅仅符合1NF的设计，仍然会存在数据冗余过大，插入异常，删除异常，修改异常的问题，例如对于表3中的设计：</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/5b16f655b57a957bfa340d0a996a0eea_r.jpg" alt=""><br>表3</p>
+<ol>
+<li>每一名学生的学号、姓名、系名、系主任这些数据重复多次。每个系与对应的系主任的数据也重复多次——数据冗余过大</li>
+<li><p>假如学校新建了一个系，但是暂时还没有招收任何学生（比如3月份就新建了，但要等到8月份才招生），那么是无法将系名与系主任的数据单独地添加到数据表中去的 （注１）——插入异常</p>
+<p>注１：根据三种关系完整性约束中实体完整性的要求，关系中的码（注２）所包含的任意一个属性都不能为空，所有属性的组合也不能重复。为了满足此要求，图中的表，只能将学号与课名的组合作为码，否则就无法唯一地区分每一条记录。</p>
+<p>注２：码：关系中的某个属性或者某几个属性的组合，用于区分每个元组（可以把“元组”理解为一张表中的每条记录，也就是每一行）。</p>
+<ol>
+<li>假如将某个系中所有学生相关的记录都删除，那么所有系与系主任的数据也就随之消失了（一个系所有学生都没有了，并不表示这个系就没有了）。——删除异常</li>
+<li>假如李小明转系到法律系，那么为了保证数据库中数据的一致性，需要修改三条记录中系与系主任的数据。——修改异常。</li>
+</ol>
+</li>
+</ol>
+<p>正因为仅符合1NF的数据库设计存在着这样那样的问题，我们需要提高设计标准，去掉导致上述四种问题的因素，使其符合更高一级的范式（2NF），这就是所谓的“规范化”。</p>
+<p>第二范式（2NF）在关系理论中的严格定义我这里就不多介绍了（因为涉及到的铺垫比较多），只需要了解2NF对1NF进行了哪些改进即可。其改进是，2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖。接下来对这句话中涉及到的四个概念——“函数依赖”、“码”、“非主属性”、与“部分函数依赖”进行一下解释。</p>
+<h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p>我们可以这么理解（但并不是特别严格的定义）：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。也就是说，在数据表中，不存在任意两条记录，它们在X属性（或属性组）上的值相同，而在Y属性上的值不同。这也就是“函数依赖”名字的由来，类似于函数关系 y = f(x)，在x的值确定的情况下，y的值一定是确定的。</p>
+<p>例如，对于表3中的数据，找不到任何一条记录，它们的学号相同而对应的姓名不同。所以我们可以说姓名函数依赖于学号，写作 学号 → 姓名。但是反过来，因为可能出现同名的学生，所以有可能不同的两条学生记录，它们在姓名上的值相同，但对应的学号不同，所以我们不能说学号函数依赖于姓名。表中其他的函数依赖关系还有如：</p>
+<ul>
+<li>系名 → 系主任</li>
+<li>学号 → 系主任</li>
+<li>（学号，课名） → 分数</li>
+</ul>
+<p>但以下函数依赖关系则不成立：</p>
+<ul>
+<li>学号 → 课名</li>
+<li>学号 → 分数</li>
+<li>课名 → 系主任</li>
+<li>（学号，课名） → 姓名</li>
+</ul>
+<p>从“函数依赖”这个概念展开，还会有三个概念：</p>
+<p>完全函数依赖</p>
+<p>在一张表中，若 X → Y，且对于 X 的任何一个真子集（假如属性组 X 包含超过一个属性的话），X ‘ → Y 不成立，那么我们称 Y 对于 X 完全函数依赖，记作 X F→ Y。（那个F应该写在箭头的正上方，没办法打出来……，正确的写法如图1）</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/12513de20079d12b99d946072df7311a_b.jpg" alt=""><br>图1</p>
+<p>例如： </p>
+<ul>
+<li>学号 F→ 姓名 </li>
+<li>（学号，课名） F→ 分数  （注：因为同一个的学号对应的分数不确定，同一个课名对应的分数也不确定）</li>
+</ul>
+<p>部分函数依赖</p>
+<p>假如 Y 函数依赖于 X，但同时 Y 并不完全函数依赖于 X，那么我们就称 Y 部分函数依赖于 X，记作 X  P→ Y，如图2。</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/10b52b39b18b8ea9fb17b46babf4d20f_b.jpg" alt=""><br>图2</p>
+<p>例如：</p>
+<ul>
+<li>（学号，课名） P→ 姓名 </li>
+</ul>
+<p>传递函数依赖</p>
+<p>假如 Z 函数依赖于 Y，且 Y 函数依赖于 X （感谢 @百达 指出的错误，这里改为：『Y 不包含于 X，且 X 不函数依赖于 Y』这个前提），那么我们就称 Z 传递函数依赖于 X ，记作 X T→ Z，如图3。<br><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/51f8105fbbe92adaa3e343ea2db3bf49_b.jpg" alt=""><br>图3</p>
+<p>码</p>
+<p>设 K 为某表中的一个属性或属性组，若除 K 之外的所有属性都完全函数依赖于 K（这个“完全”不要漏了），那么我们称 K 为候选码，简称为码。在实际中我们通常可以理解为：假如当 K 确定的情况下，该表除 K 之外的所有属性的值也就随之确定，那么 K 就是码。一张表中可以有超过一个码。（实际应用中为了方便，通常选择其中的一个码作为主码）</p>
+<p> 例如：</p>
+<p>对于表3，（学号、课名）这个属性组就是码。该表中有且仅有这一个码。（假设所有课没有重名的情况）</p>
+<p>非主属性</p>
+<p>包含在任何一个码中的属性成为主属性。</p>
+<p>例如：</p>
+<p>对于表3，主属性就有两个，学号 与 课名。</p>
+<p>终于可以回过来看2NF了。首先，我们需要判断，表3是否符合2NF的要求？根据2NF的定义，判断的依据实际上就是看数据表中是否存在非主属性对于码的部分函数依赖。若存在，则数据表最高只符合1NF的要求，若不存在，则符合2NF的要求。判断的方法是：</p>
+<p>第一步：找出数据表中所有的码。</p>
+<p>第二步：根据第一步所得到的码，找出所有的主属性。</p>
+<p>第三步：数据表中，除去所有的主属性，剩下的就都是非主属性了。</p>
+<p>第四步：查看是否存在非主属性对码的部分函数依赖。</p>
+<p>对于表3，根据前面所说的四步，我们可以这么做：</p>
+<p>第一步：</p>
+<ul>
+<li>查看所有每一单个属性，当它的值确定了，是否剩下的所有属性值都能确定。</li>
+<li>查看所有包含有两个属性的属性组，当它的值确定了，是否剩下的所有属性值都能确定。</li>
+<li>……</li>
+<li>查看所有包含了六个属性，也就是所有属性的属性组，当它的值确定了，是否剩下的所有属性值都能确定。</li>
+</ul>
+<p>看起来很麻烦是吧，但是这里有一个诀窍，就是假如A是码，那么所有包含了A的属性组，如（A，B）、（A，C）、（A，B，C）等等，都不是码了（因为作为码的要求里有一个“完全函数依赖”）。图4表示了表中所有的函数依赖关系：</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/51e2689ac9416a91800e63101bee9db7_b.jpg" alt=""></p>
+<p>图4</p>
+<p>这一步完成以后，可以得到，表3的码只有一个，就是（学号、课名）。</p>
+<p>第二步：</p>
+<p>主属性有两个：学号 与 课名</p>
+<p>第三步：</p>
+<p>非主属性有四个：姓名、系名、系主任、分数</p>
+<p>第四步：</p>
+<p>对于（学号，课名） → 姓名，有 学号 → 姓名，存在非主属性 姓名 对码（学号，课名）的部分函数依赖。</p>
+<p>对于（学号，课名） → 系名，有 学号 → 系名，存在非主属性 系名 对码（学号，课名）的部分函数依赖。</p>
+<p>对于（学号，课名） → 系主任，有 学号 → 系主任，存在非主属性  对码（学号，课名）的部分函数依赖。</p>
+<p>所以表3存在非主属性对于码的部分函数依赖，最高只符合1NF的要求，不符合2NF的要求。</p>
+<p>为了让表3符合2NF的要求，我们必须消除这些部分函数依赖，只有一个办法，就是将大数据表拆分成两个或者更多个更小的数据表，在拆分的过程中，要达到更高一级范式的要求，这个过程叫做”模式分解“。模式分解的方法不是唯一的，以下是其中一种方法：</p>
+<p>选课（学号，课名，分数）</p>
+<p>学生（学号，姓名，系名，系主任）</p>
+<p>我们先来判断以下，选课表与学生表，是否符合了2NF的要求？</p>
+<p>对于选课表，其码是（学号，课名），主属性是学号和课名，非主属性是分数，学号确定，并不能唯一确定分数，课名确定，也不能唯一确定分数，所以不存在非主属性分数对于码 （学号，课名）的部分函数依赖，所以此表符合2NF的要求。</p>
+<p>对于学生表，其码是学号，主属性是学号，非主属性是姓名、系名和系主任，因为码只有一个属性，所以不可能存在非主属性对于码 的部分函数依赖，所以此表符合2NF的要求。</p>
+<p>图5表示了模式分解以后的新的函数依赖关系</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/2f4b4a887f6a61674a49d03d79e3fe17_b.jpg" alt=""></p>
+<p>图5</p>
+<p>表4表示了模式分解以后新的数据</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/44af74509a4e21372ed372be8560539d_b.jpg" alt=""></p>
+<p>表4</p>
+<p>（这里还涉及到一个如何进行模式分解才是正确的知识点，先不介绍了）现在我们来看一下，进行同样的操作，是否还存在着之前的那些问题？</p>
+<ol>
+<li><p>李小明转系到法律系<br>只需要修改一次李小明对应的系的值即可。——有改进数据冗余是否减少了？</p>
+</li>
+<li><p>学生的姓名、系名与系主任，不再像之前一样重复那么多次了。——有改进</p>
+</li>
+<li>删除某个系中所有的学生记录<br>该系的信息仍然全部丢失。——无改进</li>
+<li>插入一个尚无学生的新系的信息。因为学生表的码是学号，不能为空，所以此操作不被允许。——无改进</li>
+</ol>
+<p>所以说，仅仅符合2NF的要求，很多情况下还是不够的，而出现问题的原因，在于仍然存在非主属性系主任对于码学号的传递函数依赖。为了能进一步解决这些问题，我们还需要将符合2NF要求的数据表改进为符合3NF的要求。</p>
+<p>第三范式（3NF） 3NF在2NF的基础之上，消除了非主属性对于码的传递函数依赖。也就是说， 如果存在非主属性对于码的传递函数依赖，则不符合3NF的要求。</p>
+<p>接下来我们看看表4中的设计，是否符合3NF的要求。</p>
+<p>对于选课表，主码为（学号，课名），主属性为学号和课名，非主属性只有一个，为分数，不可能存在传递函数依赖，所以选课表的设计，符合3NF的要求。</p>
+<p>对于学生表，主码为学号，主属性为学号，非主属性为姓名、系名和系主任。因为 学号 → 系名，同时 系名 → 系主任，所以存在非主属性系主任对于码学号的传递函数依赖，所以学生表的设计，不符合3NF的要求。。</p>
+<p>为了让数据表设计达到3NF，我们必须进一步进行模式分解为以下形式：</p>
+<p>选课（学号，课名，分数）</p>
+<p>学生（学号，姓名，系名）</p>
+<p>系（系名，系主任）</p>
+<p>对于选课表，符合3NF的要求，之前已经分析过了。</p>
+<p>对于学生表，码为学号，主属性为学号，非主属性为系名，不可能存在非主属性对于码的传递函数依赖，所以符合3NF的要求。</p>
+<p>对于系表，码为系名，主属性为系名，非主属性为系主任，不可能存在非主属性对于码的传递函数依赖（至少要有三个属性才可能存在传递函数依赖关系），所以符合3NF的要求。。</p>
+<p>新的函数依赖关系如图6</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/5b20707ff3d9afb51ef7bfda726c3e34_b.jpg" alt=""></p>
+<p>图6</p>
+<p>新的数据表如表5</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/8bca802bcff92a8945bf808d18d7ec62_b.jpg" alt=""></p>
+<p>表5</p>
+<p>现在我们来看一下，进行同样的操作，是否还存在着之前的那些问题？</p>
+<ul>
+<li>删除某个系中所有的学生记录，该系的信息不会丢失。——有改进</li>
+<li><p>插入一个尚无学生的新系的信息。因为系表与学生表目前是独立的两张表，所以不影响。——有改进</p>
+</li>
+<li><p>数据冗余更加少了。——有改进</p>
+</li>
+</ul>
+<p>结论</p>
+<p>由此可见，符合3NF要求的数据库设计，基本上解决了数据冗余过大，插入异常，修改异常，删除异常的问题。当然，在实际中，往往为了性能上或者应对扩展的需要，经常 做到2NF或者1NF，但是作为数据库设计人员，至少应该知道，3NF的要求是怎样的。</p>
+<p>BCNF范式</p>
+<p>要了解 BCNF 范式，那么先看这样一个问题：</p>
+<p>若：</p>
+<ul>
+<li>某公司有若干个仓库；</li>
+<li>每个仓库只能有一名管理员，一名管理员只能在一个仓库中工作；</li>
+<li>一个仓库中可以存放多种物品，一种物品也可以存放在不同的仓库中。每种物品在每个仓库中都有对应的数量。</li>
+</ul>
+<p>那么关系模式 仓库（仓库名，管理员，物品名，数量） 属于哪一级范式？</p>
+<p>答：已知函数依赖集：仓库名 → 管理员，管理员 → 仓库名，（仓库名，物品名）→ 数量</p>
+<p>码：（管理员，物品名），（仓库名，物品名）</p>
+<p>主属性：仓库名、管理员、物品名</p>
+<p>非主属性：数量</p>
+<p>∵ 不存在非主属性对码的部分函数依赖和传递函数依赖。∴ 此关系模式属于3NF。</p>
+<p>基于此关系模式的关系（具体的数据）可能如图所示：</p>
+<p><img src="http://omqz8y2im.bkt.clouddn.com/blog/database-design/68d080d437732aad8cfe451b427849d6_b.jpg" alt=""></p>
+<p>好，既然此关系模式已经属于了 3NF，那么这个关系模式是否存在问题呢？我们来看以下几种操作：</p>
+<p>先新增加一个仓库，但尚未存放任何物品，是否可以为该仓库指派管理员？——不可以，因为物品名也是主属性，根据实体完整性的要求，主属性不能为空。</p>
+<p>某仓库被清空后，需要删除所有与这个仓库相关的物品存放记录，会带来什么问题？——仓库本身与管理员的信息也被随之删除了。</p>
+<p>如果某仓库更换了管理员，会带来什么问题？——这个仓库有几条物品存放记录，就要修改多少次管理员信息。</p>
+<p>从这里我们可以得出结论，在某些特殊情况下，即使关系模式符合 3NF 的要求，仍然存在着插入异常，修改异常与删除异常的问题，仍然不是 ”好“ 的设计。</p>
+<p>造成此问题的原因：存在着主属性对于码的部分函数依赖与传递函数依赖。（在此例中就是存在主属性【仓库名】对于码【（管理员，物品名）】的部分函数依赖。</p>
+<p>解决办法就是要在 3NF 的基础上消除主属性对于码的部分与传递函数依赖。</p>
+<p>仓库（仓库名，管理员）</p>
+<p>库存（仓库名，物品名，数量）</p>
+<p>这样，之前的插入异常，修改异常与删除异常的问题就被解决了。</p>
+<p>以上就是关于 BCNF 的解释。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/underscore-interpretation-1/" rel="next" title="阅读underscore系列(一)--对象和函数两种接口风格的实现">
+                <i class="fa fa-chevron-left"></i> 阅读underscore系列(一)--对象和函数两种接口风格的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://omqz8y2im.bkt.clouddn.com/business-mix-set-2012.png"
+               alt="久渡" />
+          <p class="site-author-name" itemprop="name">久渡</p>
+          <p class="site-description motion-element" itemprop="description">吃饭，睡觉，改bug</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/strongfanfan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/fanxuehui" target="_blank" title="SegFault">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  SegFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/strongfanfan" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-at"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://strongfanfan.top" target="_blank" title="简历">
+                  
+                    <i class="fa fa-fw fa-newspaper-o"></i>
+                  
+                  简历
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数依赖"><span class="nav-number">1.</span> <span class="nav-text">函数依赖</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">久渡</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "85c55bdbae10401399f1f77b16e307ef",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RCevw1YKRxYWTle01PNeyQ1Q-gzGzoHsz", "JSJLmsffsw14wNUbjwnQaEi8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
