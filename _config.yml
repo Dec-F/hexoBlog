@@ -78,4 +78,4 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/strongfanfan/hexoBlog.git
-  branch: master
+  branch: blog
