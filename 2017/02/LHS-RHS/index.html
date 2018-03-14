@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="No Bug,No Jump">
 <meta property="og:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-17T01:07:33.931Z">
+<meta property="og:updated_time" content="2018-03-10T08:12:18.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LHS&#x2F;RHS查询——向下一层系列（一）">
 <meta name="twitter:description" content="这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。 由于经验还很少，不对的地方，感谢指正  本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如1234var imageArr=[],newData=[];imageArr=imageArr+newData; 现在看着很正常，但当时想为什么左侧的imageArr是赋值，右面是取值，出现在一个表达式是怎么运算的呢。 这里就是J">
@@ -393,7 +393,7 @@
 <p>这是向下一层系列第一篇，向下旨在敦促自己向底层靠近，多问why。</p>
 <p>由于经验还很少，不对的地方，感谢指正</p>
 </blockquote>
-<p>本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> imageArr=[],newData=[];</div><div class="line"></div><div class="line">imageArr=imageArr+newData;</div></pre></td></tr></table></figure></p>
+<p>本人非科班出身，所以刚接触编程的时候会有很多常识性问题，比如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> imageArr=[],newData=[];</span><br><span class="line"></span><br><span class="line">imageArr=imageArr+newData;</span><br></pre></td></tr></table></figure></p>
 <p>现在看着很正常，但当时想为什么左侧的<code>imageArr</code>是赋值，右面是取值，出现在一个表达式是怎么运算的呢。</p>
 <p>这里就是JavaScript中的LHS和RHS查询的区别。<br><a id="more"></a></p>
 <p><strong>简单来说，赋值运算的左侧会执行LHS查询，右侧则执行RHS查询。</strong></p>
@@ -402,7 +402,7 @@
 <li>RHS是寻找一个源值，即 “取得某某的值” 。</li>
 </ul>
 <p>更重要的是，在很多地方，赋值运算并不是显式的，例如形参</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">par</span>)</span>&#123;</div><div class="line">    alert(par)</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(<span class="number">22</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">par</span>)</span>&#123;</span><br><span class="line">    alert(par)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">22</span>)</span><br></pre></td></tr></table></figure>
 <p>最后调用<code>test()</code>并传参时，会先进行一次LHS查询，声明一个变量为par，并把22赋值给par；<br><code>alert(par)</code>时执行一次RHS查询。</p>
 <p>其实在调用<code>test()</code>时也是一次RHS查询</p>
 
@@ -514,7 +514,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

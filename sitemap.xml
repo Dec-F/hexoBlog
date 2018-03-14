@@ -2,6 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.strongfanfan.top/2018/01/notice/</loc>
+    
+    <lastmod>2018-03-14T06:50:29.817Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/tags/index.html</loc>
+    
+    <lastmod>2018-03-10T08:12:18.484Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/reading/index.html</loc>
+    
+    <lastmod>2018-03-10T08:12:18.482Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/categories/index.html</loc>
+    
+    <lastmod>2018-03-10T08:12:18.478Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/about/index.html</loc>
+    
+    <lastmod>2018-03-10T08:12:18.477Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/01/%E9%AB%98%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.476Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/01/%E5%B7%A5%E5%85%B7%E9%9B%86/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.476Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/01/video%E6%A0%87%E7%AD%BE%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.475Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/</loc>
     
     <lastmod>2018-03-10T08:12:18.474Z</lastmod>
@@ -23,142 +79,93 @@
   </url>
   
   <url>
-    <loc>http://blog.strongfanfan.top/2017/08/database-design/</loc>
-    
-    <lastmod>2017-08-20T03:15:27.342Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/tags/index.html</loc>
-    
-    <lastmod>2017-08-17T01:07:33.951Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/reading/index.html</loc>
-    
-    <lastmod>2017-08-17T01:07:33.950Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/categories/index.html</loc>
-    
-    <lastmod>2017-08-17T01:07:33.946Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/about/index.html</loc>
-    
-    <lastmod>2017-08-17T01:07:33.945Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/01/%E9%AB%98%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.944Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/01/%E5%B7%A5%E5%85%B7%E9%9B%86/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.943Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/01/video%E6%A0%87%E7%AD%BE%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.942Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.strongfanfan.top/2017/02/translation-1/</loc>
     
-    <lastmod>2017-08-17T01:07:33.939Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/04/strategy-pattern/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.938Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.471Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/02/redux-1/</loc>
     
-    <lastmod>2017-08-17T01:07:33.937Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.470Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/04/strategy-pattern/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.470Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/04/observer-pattern/</loc>
     
-    <lastmod>2017-08-17T01:07:33.937Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/01/npm%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.936Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2016/12/hexo%E6%94%BE%E5%88%B0%E5%AD%90%E7%9B%AE%E5%BD%95%E5%B9%B6%E9%80%9A%E8%BF%87%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.935Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.469Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/05/hexo-cloud-comments/</loc>
     
-    <lastmod>2017-08-17T01:07:33.934Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.468Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/01/npm%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.468Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2016/12/hexo%E6%94%BE%E5%88%B0%E5%AD%90%E7%9B%AE%E5%BD%95%E5%B9%B6%E9%80%9A%E8%BF%87%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.468Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/04/get-set/</loc>
     
-    <lastmod>2017-08-17T01:07:33.933Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.467Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/08/database-design/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.467Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/02/Reproduced1/</loc>
     
-    <lastmod>2017-08-17T01:07:33.933Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/02/LinkedList/</loc>
-    
-    <lastmod>2017-08-17T01:07:33.932Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.466Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/02/LHS-RHS/</loc>
     
-    <lastmod>2017-08-17T01:07:33.931Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.465Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/02/LinkedList/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.465Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.strongfanfan.top/2017/01/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</loc>
     
-    <lastmod>2017-08-17T01:07:33.930Z</lastmod>
+    <lastmod>2018-03-10T08:12:18.464Z</lastmod>
     
   </url>
   

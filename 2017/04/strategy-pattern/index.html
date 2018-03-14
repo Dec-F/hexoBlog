@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。 一个基于策略模式的程序至少由两部分组成。  第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策略类。要">
+<meta name="description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   一个基于策略模式的程序至少由两部分组成。    第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策">
 <meta name="keywords" content="JavaScript,设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="策略模式简介">
 <meta property="og:url" content="http://blog.strongfanfan.top/2017/04/strategy-pattern/index.html">
 <meta property="og:site_name" content="No Bug,No Jump">
-<meta property="og:description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。 一个基于策略模式的程序至少由两部分组成。  第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策略类。要">
+<meta property="og:description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   一个基于策略模式的程序至少由两部分组成。    第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-17T01:07:33.938Z">
+<meta property="og:updated_time" content="2018-03-10T08:12:18.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="策略模式简介">
-<meta name="twitter:description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。 一个基于策略模式的程序至少由两部分组成。  第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策略类。要">
+<meta name="twitter:description" content="策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   一个基于策略模式的程序至少由两部分组成。    第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。   第二个部分是环境类Context，Context接受客户的请求，随后 把请求委托给某一个策">
 
 
 
@@ -391,7 +391,11 @@
       
         <blockquote>
 <p>策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策 略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。</p>
+</blockquote>
+<blockquote>
 <p>一个基于策略模式的程序至少由两部分组成。</p>
+</blockquote>
+<blockquote>
 <ol>
 <li><p>第一个部分是一组策略类，策略类封装了具体 的算法，并负责具体的计算过程。 </p>
 </li>
@@ -400,11 +404,11 @@
 </ol>
 </blockquote>
 <a id="more"></a>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 策略组</span></div><div class="line"> <span class="keyword">let</span> strategies=&#123;</div><div class="line">               S(base)&#123;</div><div class="line">                    <span class="keyword">return</span> base*<span class="number">4</span></div><div class="line">               &#125;,</div><div class="line">               A(base)&#123;</div><div class="line">                   <span class="keyword">return</span> base*<span class="number">3</span></div><div class="line">               &#125;,</div><div class="line">               B(base)&#123;</div><div class="line">                   <span class="keyword">return</span> base*<span class="number">2</span></div><div class="line">               &#125;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">           <span class="comment">//Context </span></div><div class="line">            <span class="function"><span class="keyword">function</span> <span class="title">calculate</span> (<span class="params">base,lev</span>) </span>&#123;</div><div class="line">                </div><div class="line">                   <span class="built_in">console</span>.log(strategies[lev](base))</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            </div><div class="line">            calculate(<span class="number">3000</span>,<span class="string">'S'</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 策略组</span></span><br><span class="line"> <span class="keyword">let</span> strategies=&#123;</span><br><span class="line">               S(base)&#123;</span><br><span class="line">                    <span class="keyword">return</span> base*<span class="number">4</span></span><br><span class="line">               &#125;,</span><br><span class="line">               A(base)&#123;</span><br><span class="line">                   <span class="keyword">return</span> base*<span class="number">3</span></span><br><span class="line">               &#125;,</span><br><span class="line">               B(base)&#123;</span><br><span class="line">                   <span class="keyword">return</span> base*<span class="number">2</span></span><br><span class="line">               &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">           <span class="comment">//Context </span></span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">calculate</span> (<span class="params">base,lev</span>) </span>&#123;</span><br><span class="line">                </span><br><span class="line">                   <span class="built_in">console</span>.log(strategies[lev](base))</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            calculate(<span class="number">3000</span>,<span class="string">'S'</span>)</span><br></pre></td></tr></table></figure>
 <p>这是策略模式的一种比较标准的实现</p>
 <p>在JavaScript中，函数是一等对象，可以作为策略类的封装四处传递。而Context就是一个高阶函数。</p>
 <p>策略模式在Javascript的实现非常简单方便。重写一下上面的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> S = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">4</span>;</div><div class="line"><span class="keyword">const</span> A = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">3</span>;</div><div class="line"><span class="keyword">const</span> B = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">2</span>;</div><div class="line">    </div><div class="line"><span class="keyword">const</span> calculate = <span class="function">(<span class="params">fn,base</span>) =&gt;</span> fn(base)</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(calculate(S,<span class="number">4000</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> S = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> A = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">3</span>;</span><br><span class="line"><span class="keyword">const</span> B = <span class="function">(<span class="params">base</span>) =&gt;</span>  base*<span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">const</span> calculate = <span class="function">(<span class="params">fn,base</span>) =&gt;</span> fn(base)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(calculate(S,<span class="number">4000</span>))</span><br></pre></td></tr></table></figure>
 <p>用了ES6改写以后，是不是优雅了很多。</p>
 
       
@@ -515,7 +519,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
