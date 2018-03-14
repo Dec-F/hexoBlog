@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.474Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/06/underscore-interpretation-1/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.473Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.strongfanfan.top/2017/06/tree-edit/</loc>
+    
+    <lastmod>2018-03-10T08:12:18.472Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.strongfanfan.top/2017/08/database-design/</loc>
     
     <lastmod>2017-08-20T03:15:27.342Z</lastmod>
@@ -107,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://blog.strongfanfan.top/2017/02/Reproduced1/</loc>
+    <loc>http://blog.strongfanfan.top/2017/04/get-set/</loc>
     
     <lastmod>2017-08-17T01:07:33.933Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.strongfanfan.top/2017/04/get-set/</loc>
+    <loc>http://blog.strongfanfan.top/2017/02/Reproduced1/</loc>
     
     <lastmod>2017-08-17T01:07:33.933Z</lastmod>
     
@@ -138,27 +159,6 @@
     <loc>http://blog.strongfanfan.top/2017/01/JavaScript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</loc>
     
     <lastmod>2017-08-17T01:07:33.930Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/06/underscore-interpretation-1/</loc>
-    
-    <lastmod>2017-06-24T05:16:04.635Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/06/underscore-interpretation-2/</loc>
-    
-    <lastmod>2017-06-24T05:15:57.259Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.strongfanfan.top/2017/06/tree-edit/</loc>
-    
-    <lastmod>2017-06-17T02:45:26.581Z</lastmod>
     
   </url>
   
